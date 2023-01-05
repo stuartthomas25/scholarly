@@ -305,6 +305,7 @@ class PublicationParser(object):
                 elif key == 'publisher':
                     publication['bib']['publisher'] = val.text
                 elif key == 'publication date':
+                    publication['pub_date'] = val.text
 
                     patterns = ['YYYY/M',
                                 'YYYY/MM/DD',

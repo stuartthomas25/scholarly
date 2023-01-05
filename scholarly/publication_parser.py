@@ -266,7 +266,6 @@ class PublicationParser(object):
                 'div', class_='gs_ggs gs_fl').a['href']
         return publication
 
-
     def fill(self, publication: Publication)->Publication:
         """Populate the Publication with information from its profile
 
@@ -276,7 +275,8 @@ class PublicationParser(object):
         if publication['source'] == PublicationSource.AUTHOR_PUBLICATION_ENTRY:
             url = _CITATIONPUB.format(publication['author_pub_id'])
             soup = self.nav._get_soup(url)
-            publication['bib']['title'] = soup.find('div', id='gsc_oci_title').text
+            # publication['bib']['title'] = soup.find('div', id='gsc_oci_title').text
+            publication['bib']['title'] = soup.find('meta', property="og:title").attrs['content'][1:-1]
             if publication['bib']['title'][-1] == '\u2026':
                 merged_snippet = soup.find('div', class_='gsc_oci_merged_snippet')
                 if merged_snippet:
